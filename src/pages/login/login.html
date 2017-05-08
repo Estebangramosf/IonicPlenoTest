@@ -34,13 +34,23 @@
 		<button ion-button block id="loginButton" (tap)="login()">Login</button>
 
 		<!-- Twitter login button -->
-		<button ion-button block id="loginTwitter" (tap)="loginWithTwitter()">
+		<button ion-button block id="loginTwitter" (tap)="loginWithTwitter($event)">
 			<ion-icon name="logo-twitter"></ion-icon>&nbsp;Login with Twitter
 		</button>
 
 		<!-- Facebook login button -->
-		<button ion-button block id="loginFacebook" (tap)="loginWithFacebook()">
+		<button ion-button block id="loginFacebook" (tap)="loginWithFacebook($event)">
 			<ion-icon name="logo-facebook"></ion-icon>&nbsp;Login with Facebook
+		</button>			
+
+		<!-- Google Plus login button -->
+		<button ion-button block id="loginGooglePlus" (tap)="loginWithGooglePlus($event)">
+			<ion-icon name="logo-google"></ion-icon>&nbsp;Login with G+
+		</button>					
+
+		<!-- Github login button -->
+		<button ion-button block id="loginGithub" (tap)="loginWithGithub($event)">
+			<ion-icon name="logo-github"></ion-icon>&nbsp;Login with Github
 		</button>			
 
 		<!-- Create account button -->
