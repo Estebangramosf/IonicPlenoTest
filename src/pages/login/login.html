@@ -1,28 +1,51 @@
+<!-- View header -->
 <ion-header>
-  <ion-navbar>
-    <ion-title>Login test Pleno</ion-title>
-  </ion-navbar>
+	<!-- navbar -->
+	<ion-navbar>
+		<!-- title -->
+		<ion-title>Login test Pleno</ion-title>
+	</ion-navbar>
 </ion-header>
 
+<!-- View content -->
 <ion-content padding>
 
+	<!-- Login image, company representative -->
 	<img src="https://www.pleno.digital/assets/img/portal/logo_pleno_top.png" />
 	<h1>Login</h1>		
 
-	<ion-label ion-text color="primary" stacked>Email</ion-label>
+	<!-- Login form -->
+	<form id="login-form">
+		<!-- Email field with label -->
+		<ion-label ion-text color="primary" stacked>Email</ion-label>
+		<ion-item>	
+			<ion-input id="email" type="email" placeholder="Email"></ion-input>			
+			<!-- [(ngModel)]="user.email" -->
+		</ion-item>		
 
-	<ion-item>	
-		<ion-input [(ngModel)]="user.email" type="email" placeholder="Email"></ion-input>			
-	</ion-item>		
+		<!-- Password field with label -->
+		<ion-label ion-text color="primary" stacked>Password</ion-label>
+		<ion-item padding-bottom>
+			<ion-input id="password" type="password" placeholder="Password"></ion-input>
+			<!-- [(ngModel)]="user.password" -->
+		</ion-item>
+		
+		<!-- Login button -->
+		<button ion-button block id="loginButton" (tap)="login()">Login</button>
 
-	<ion-label ion-text color="primary" stacked>Password</ion-label>
-	<ion-item padding-bottom>
-		<ion-input [(ngModel)]="user.password" type="password" placeholder="Password"></ion-input>
-	</ion-item>
-	
-	<button ion-button block (tap)="login()">Login</button>
+		<!-- Twitter login button -->
+		<button ion-button block id="loginTwitter" (tap)="loginWithTwitter()">
+			<ion-icon name="logo-twitter"></ion-icon>&nbsp;Login with Twitter
+		</button>
 
-	¿No tienes una cuenta?	
-	<button color="secondary" ion-button block (tap)="signIn()">Sign In</button>
+		<!-- Facebook login button -->
+		<button ion-button block id="loginFacebook" (tap)="loginWithFacebook()">
+			<ion-icon name="logo-facebook"></ion-icon>&nbsp;Login with Facebook
+		</button>			
 
-</ion-content>
+		<!-- Create account button -->
+		¿No tienes una cuenta?	
+		<button color="secondary" ion-button block (tap)="signIn()">Sign In</button>			
+	</form>
+
+</ion-content>	
