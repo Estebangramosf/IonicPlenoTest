@@ -9,6 +9,8 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 
 /* Page Imports */
 import { TabsPage } from '../pages/tabs/tabs';
+import { LoginPage } from '../pages/login/login';
+
 
 /* Component declaration */
 @Component({
@@ -17,7 +19,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 /* Exportable class */
 export class MyApp {
-  rootPage:any = TabsPage;
+  //rootPage:any = TabsPage;
+  rootPage:any = LoginPage;
 
   constructor(platform: Platform, 
     statusBar: StatusBar, splashScreen: Splashscreen

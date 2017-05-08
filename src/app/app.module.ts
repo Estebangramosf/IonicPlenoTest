@@ -14,8 +14,13 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { LoginPage } from '../pages/login/login';
 
-
+var links = [
+   { component: LoginPage, name:'Login', segment:'login' },
+   { component: TabsPage, name:'Tabs', segment:'tabs' },
+   //{ component: ShowNotificationPage, name:'notification', segment:'notification/:id' },
+];
 
 /* Angular mode to include all dependencies and components to use in the app */
 
@@ -25,11 +30,12 @@ import { TabsPage } from '../pages/tabs/tabs';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp, links)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -37,7 +43,8 @@ import { TabsPage } from '../pages/tabs/tabs';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    LoginPage
   ],
   providers: [
     StatusBar,

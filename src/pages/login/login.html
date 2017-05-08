@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Login test Pleno</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+	<img src="https://www.pleno.digital/assets/img/portal/logo_pleno_top.png" />
+	<h1>Login</h1>		
+
+	<ion-label ion-text color="primary" stacked>Email</ion-label>
+
+	<ion-item>	
+		<ion-input [(ngModel)]="user.email" type="email" placeholder="Email"></ion-input>			
+	</ion-item>		
+
+	<ion-label ion-text color="primary" stacked>Password</ion-label>
+	<ion-item padding-bottom>
+		<ion-input [(ngModel)]="user.password" type="password" placeholder="Password"></ion-input>
+	</ion-item>
+	
+	<button ion-button block (tap)="login()">Login</button>
+
+	¿No tienes una cuenta?	
+	<button color="secondary" ion-button block (tap)="signIn()">Sign In</button>
+
+</ion-content>
