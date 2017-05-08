@@ -24,46 +24,46 @@ import { AuthData } from '../providers/auth-data';
 import { FIREBASE_CONFIG } from '../configs/firebase.config.ts';
 
 const myFirebaseAuthConfig = {
-  provider: AuthProviders.Password,
-  method: AuthMethods.Password
+	provider: AuthProviders.Password,
+	method: AuthMethods.Password
 }
 
 var links = [
-   { component: LoginPage, name:'Login', segment:'login' },
-   { component: TabsPage, name:'Tabs', segment:'tabs' },
-   //{ component: ShowNotificationPage, name:'notification', segment:'notification/:id' },
+	{ component: LoginPage, name:'Login', segment:'login' },
+	{ component: TabsPage, name:'Tabs', segment:'tabs' },
+	//{ component: ShowNotificationPage, name:'notification', segment:'notification/:id' },
 ];
 
 
 /* Angular mode to include all dependencies and components to use in the app */
 @NgModule({
-  declarations: [
-    MyApp,
-    AboutPage,
-    ContactPage,
-    HomePage,
-    TabsPage,
-    LoginPage
-  ],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(MyApp, links),
-    AngularFireModule.initializeApp(FIREBASE_CONFIG, /*myFirebaseAuthConfig*/)
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    AboutPage,
-    ContactPage,
-    HomePage,
-    TabsPage,
-    LoginPage
-  ],
-  providers: [
-    StatusBar,
-    Splashscreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    //AuthData
-  ]
+	declarations: [
+		MyApp,
+		AboutPage,
+		ContactPage,
+		HomePage,
+		TabsPage,
+		LoginPage
+	],
+  	imports: [
+		BrowserModule,
+		IonicModule.forRoot(MyApp, links),
+		AngularFireModule.initializeApp(FIREBASE_CONFIG, myFirebaseAuthConfig)
+  	],
+	bootstrap: [IonicApp],
+	entryComponents: [
+		MyApp,
+		AboutPage,
+		ContactPage,
+		HomePage,
+		TabsPage,
+		LoginPage
+  	],
+  	providers: [
+		StatusBar,
+		Splashscreen,
+		{provide: ErrorHandler, useClass: IonicErrorHandler},
+		AuthData
+  	]
 })
 export class AppModule {}

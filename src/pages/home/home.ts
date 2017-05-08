@@ -3,6 +3,11 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 
+/* Service Imports */
+import { AuthData } from '../../services/auth-data';
+import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
+import firebase from 'firebase';
+
 /* Component declaration */
 @Component({
 	selector: 'page-home',
@@ -13,7 +18,8 @@ import { LoginPage } from '../login/login';
 export class HomePage {
 
 	constructor(
-		public navCtrl: NavController
+		public		navCtrl		: 	NavController,
+	 	public		af				:	AngularFire, 			
 	) {
 		window.localStorage.removeItem('user');
 		/* Validations that catch the non logged user */
@@ -28,5 +34,11 @@ export class HomePage {
 		let user = window.localStorage.getItem('user');
 		return user !== null && user !== undefined;
 	}
+
+  	logoutUser(): firebase.Promise<any> {
+  		console.log(this.af.auth);
+  		this.af.auth.logout();
+    	return this.navCtrl.push(LoginPage);
+  	}
 
 }

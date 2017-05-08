@@ -14,57 +14,95 @@
 	<img src="https://www.pleno.digital/assets/img/portal/logo_pleno_top.png" />
 	<h2>Login</h2>		
 
+	<!-- 
+		##########################################################
+						LOGIN WITH SOCIAL BUTTONS FIREBASE
+		##########################################################
+	-->
+
+
+	<!-- Twitter login button -->
+	<button ion-button block id="loginTwitter" ion-text color="twitter" (tap)="loginWithTwitter($event)">
+		<ion-icon name="logo-twitter"></ion-icon>&nbsp;Login with Twitter
+	</button>
+
+	<!-- Facebook login button -->
+	<button ion-button block id="loginFacebook" ion-text color="facebook" (tap)="loginWithFacebook($event)">
+		<ion-icon name="logo-facebook"></ion-icon>&nbsp;Login with Facebook
+	</button>			
+
+	<!-- Google Plus login button -->
+	<button ion-button block id="loginGooglePlus" ion-text color="google" (tap)="loginWithGooglePlus($event)">
+		<ion-icon name="logo-google"></ion-icon>&nbsp;Login with G+
+	</button>					
+
+	<!-- Github login button -->
+	<button ion-button block id="loginGithub" ion-text color="github" (tap)="loginWithGithub($event)">
+		<ion-icon name="logo-github"></ion-icon>&nbsp;Login with Github
+	</button>		
+
+
+	<!-- 
+		##########################################################
+						LOGIN WITH CREDENTIALS FIREBASE
+		##########################################################
+	-->
+
+	<h4>¿Inicias con credenciales?</h4>
+
+
+
+	
+
 	<!-- Login form -->
-	<form id="login-form">
+  <form id="login-form" [formGroup]="loginForm" (submit)="loginUser()" novalidate>
 
+   	<ion-item>
+      	<ion-label stacked>Email</ion-label>
+      	<ion-input #email 
+      		formControlName="email" 
+      		type="email" 
+      		(change)="elementChanged(email)"
+        		placeholder="Your email address"
+        		[class.invalid]="!loginForm.controls.email.valid && loginForm.controls.email.dirty">		
+     		</ion-input>
+    	</ion-item>
 
-		<!-- Twitter login button -->
-		<button ion-button block id="loginTwitter" ion-text color="twitter" (tap)="loginWithTwitter($event)">
-			<ion-icon name="logo-twitter"></ion-icon>&nbsp;Login with Twitter
-		</button>
+    	<ion-item 
+    		class="error-message" 
+ 			*ngIf="!loginForm.controls.email.valid  && loginForm.controls.email.dirty">
+      	<p>Please enter a valid email.</p>
+    	</ion-item>
 
-		<!-- Facebook login button -->
-		<button ion-button block id="loginFacebook" ion-text color="facebook" (tap)="loginWithFacebook($event)">
-			<ion-icon name="logo-facebook"></ion-icon>&nbsp;Login with Facebook
-		</button>			
+    	<ion-item>
+      	<ion-label stacked>Password</ion-label>
+      	<ion-input #password 
+      		formControlName="password" 
+      		type="password"
+        		(change)="elementChanged(password)"
+        		placeholder="Your password"
+        		[class.invalid]="!loginForm.controls.password.valid && loginForm.controls.password.dirty">        			
+     		</ion-input>
+    	</ion-item>
 
-		<!-- Google Plus login button -->
-		<button ion-button block id="loginGooglePlus" ion-text color="google" (tap)="loginWithGooglePlus($event)">
-			<ion-icon name="logo-google"></ion-icon>&nbsp;Login with G+
-		</button>					
+    	<ion-item 
+    		class="error-message" 
+    		*ngIf="!loginForm.controls.password.valid  && loginForm.controls.password.dirty">
+      	<p>Your password needs more than 6 characters.</p>
+    	</ion-item>
 
-		<!-- Github login button -->
-		<button ion-button block id="loginGithub" ion-text color="github" (tap)="loginWithGithub($event)">
-			<ion-icon name="logo-github"></ion-icon>&nbsp;Login with Github
-		</button>		
+    	<button ion-button block type="submit">
+   		Login
+    	</button>
 
-		<h4>¿Inicias con credenciales?</h4>
+  	</form>
 
-		<!-- Email field with label -->
-		<ion-label ion-text color="primary" stacked>Email</ion-label>
-		<ion-item>	
-			<ion-input id="email" type="email" required placeholder="Email"></ion-input>			
-			<!-- [(ngModel)]="user.email" -->
-		</ion-item>		
+  	<button ion-button block clear (click)="goToResetPassword()">
+    	I forgot my password 🙁
+  	</button>
 
-		<!-- Password field with label -->
-		<ion-label ion-text color="primary" stacked>Password</ion-label>
-		<ion-item padding-bottom>
-			<ion-input id="password" type="password" required placeholder="Password"></ion-input>
-			<!-- [(ngModel)]="user.password" -->
-		</ion-item>
-		
-		<!-- Login button -->
-		<button ion-button block id="loginButton" (tap)="login($event)">Login</button>
-
-		<!-- Create account button -->
-		¿No tienes una cuenta?	
-		<button color="secondary" ion-button block (tap)="signIn()">Sign In</button>			
-
-		<!-- Forgot password -->
-		¿No sabes tu clave?	
-		<button color="secondary" ion-button block (tap)="onForgotPassword($event)">Reset Password</button>			
-
-	</form>
+  	<button ion-button block clear (click)="createAccount()">
+    	Create a new account
+  	</button>
 
 </ion-content>	

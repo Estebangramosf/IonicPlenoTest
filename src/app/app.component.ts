@@ -16,36 +16,37 @@ import { HomePage } from '../pages/home/home';
 
 /* Component declaration */
 @Component({
-  templateUrl: 'app.html'
+	templateUrl: 'app.html'
 })
 
 /* Exportable class */
 export class MyApp {
-  //rootPage:any = TabsPage;
-  rootPage:any = LoginPage;
+	//rootPage:any = TabsPage;
+	rootPage:any = LoginPage;
 
-  constructor(
-    platform: Platform, 
-    statusBar: StatusBar, 
-    splashScreen: Splashscreen,
-    public af:AngularFire
-  ) {
+	constructor(
+		platform: Platform, 
+		statusBar: StatusBar, 
+		splashScreen: Splashscreen,
+		public af:AngularFire
+	) {
+		
+		/* Validate that user was logged in and redirecto to home, else redirect to login view */
+		const authObserver = af.auth.subscribe( user => {
+			if (user) {
+				this.rootPage = HomePage;
+				authObserver.unsubscribe();
+			} else {
+				this.rootPage = LoginPage;
+				authObserver.unsubscribe();
+			}
+		});
 
-    const authObserver = af.auth.subscribe( user => {
-      if (user) {
-        this.rootPage = HomePage;
-        authObserver.unsubscribe();
-      } else {
-        this.rootPage = LoginPage;
-        authObserver.unsubscribe();
-      }
-    });
-
-    platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      StatusBar.styleDefault();
-      Splashscreen.hide();
-    });
-  }
+		platform.ready().then(() => {
+			// Okay, so the platform is ready and our plugins are available.
+			// Here you can do any higher level native things you might need.
+			StatusBar.styleDefault();
+			Splashscreen.hide();
+		});
+	}
 }

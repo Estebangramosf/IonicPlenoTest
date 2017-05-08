@@ -1,0 +1,28 @@
+		<!-- Email field with label -->
+		
+		<ion-label ion-text color="primary" stacked>Email</ion-label>
+		<ion-item>	
+			<ion-input id="email" type="email" required placeholder="Email"></ion-input>			
+			<!-- [(ngModel)]="user.email" -->
+		</ion-item>		
+
+		<!-- Password field with label -->
+		<ion-label ion-text color="primary" stacked>Password</ion-label>
+		<ion-item padding-bottom>
+			<ion-input id="password" type="password" required placeholder="Password"></ion-input>
+			<!-- [(ngModel)]="user.password" -->
+		</ion-item>
+		
+
+
+
+		<!-- Login button -->
+		<button ion-button block id="loginButton" (tap)="login($event)">Login</button>
+
+		<!-- Create account button -->
+		¿No tienes una cuenta?	
+		<button color="secondary" ion-button block (tap)="signIn()">Sign In</button>			
+
+		<!-- Forgot password -->
+		¿No sabes tu clave?	
+		<button color="secondary" ion-button block (tap)="onForgotPassword($event)">Reset Password</button>		

@@ -2,15 +2,23 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { AlertController, LoadingController, NavController } from 'ionic-angular';
 import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
+import { FormBuilder, Validators } from '@angular/forms';
 //import * as Firebase from 'firebase';
 /* Page Imports */
 //import { SignInPage } from './signin';
+import { HomePage } from '../home/home';
+import { SignupPage } from './signup';
+import { ResetPasswordPage } from './reset-password';
 
 /* Component Imports */
 import { TabsPage } from '../tabs/tabs';
 
 /* Service Imports */
+import { AuthData } from '../../providers/auth-data';
 //import { UserService } from '../../services/user.service';
+
+/* Validator Imports */
+import { EmailValidator } from '../../validators/email';
 	
 /* Component declaration */
 @Component({
@@ -22,16 +30,27 @@ import { TabsPage } from '../tabs/tabs';
 export class LoginPage implements OnInit {
 	//user = {"email":"","password":""};
 	root:any;
+	loginForm: any;
+	loading: any;
 	constructor(
-		private 	alertCtrl: AlertController,
-		public		navCtrl: NavController,
-	 	public  	loadingCtrl: LoadingController,
-	 	public 		element: ElementRef,
-	 	public		af: AngularFire, 	
+		private 		alertCtrl	: 	AlertController,
+		public		navCtrl		: 	NavController,
+		public	 	authData		: 	AuthData,
+		public 		formBuilder	: 	FormBuilder,
+	 	public	  	loadingCtrl	: 	LoadingController,
+	 	public 		element 		: 	ElementRef,
+	 	public		af				:	AngularFire, 	
 	 	//private 	userService: UserService, 
  	){ 		
  		/* Initialize var for get elements with selector queries */
  		this.element.nativeElement;
+
+		this.loginForm = formBuilder.group({
+		   email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
+		   password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
+		});
+
+
  		/*
 		DBService.openDatabase();
 		DBService.createTable();
@@ -56,6 +75,42 @@ export class LoginPage implements OnInit {
  		loginGithub.addEventListener('click', this.onGithubLogin.bind(this));
  		*/
  	}
+
+	loginUser(){
+		if (!this.loginForm.valid){
+			console.log(this.loginForm.value);
+		} else {
+			this.authData.loginUser(this.loginForm.value.email, 
+			this.loginForm.value.password).then( authData => {
+				this.navCtrl.setRoot(HomePage);
+			}, error => {
+				this.loading.dismiss().then( () => {
+					let alert = this.alertCtrl.create({
+						message: error.message,
+						buttons: [{
+							text: "Ok",
+							role: 'cancel'
+						}]
+					});
+					alert.present();
+				});
+			});
+
+			this.loading = this.loadingCtrl.create({
+				dismissOnPageChange: true,
+			});
+			this.loading.present();
+		}
+	}
+
+	goToResetPassword(){
+	    this.navCtrl.push(ResetPasswordPage);
+	}
+
+	createAccount(){
+	    this.navCtrl.push(SignupPage);
+	}
+
 
  	/* Method to login with event listener from button id */
  	onClick(e):void{

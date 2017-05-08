@@ -1,6 +1,6 @@
 /* Core Imports */
 import { Injectable } from '@angular/core';
-import { AngularFire } from 'angularfire2';
+import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 import firebase from 'firebase';
 //import { Http } from '@angular/http';
 //import 'rxjs/add/operator/map';
@@ -15,34 +15,34 @@ import firebase from 'firebase';
 export class AuthData {
 	fireAuth: any;
   	constructor(public af: AngularFire) {
-        af.auth.subscribe( user => {
-            if (user) {
-                this.fireAuth = user.auth;
-                console.log(user);
-            }
-        });    
+		af.auth.subscribe( user => {
+			if (user) {
+				this.fireAuth = user.auth;
+				console.log(user);
+			}
+		});    
   	}
 
-  loginUser(newEmail: string, newPassword: string): firebase.Promise<any> {
-    return this.af.auth.login({
-      email: newEmail,
-      password: newPassword
-    });
-  }
+	loginUser(newEmail: string, newPassword: string): firebase.Promise<any> {
+    	return this.af.auth.login({
+      	email: newEmail,
+      	password: newPassword
+    	});
+  	}
 
-  resetPassword(email: string): firebase.Promise<any> {
-    return firebase.auth().sendPasswordResetEmail(email);
-  }
+  	resetPassword(email: string): firebase.Promise<any> {
+    	return firebase.auth().sendPasswordResetEmail(email);
+  	}
 
-  logoutUser(): firebase.Promise<any> {
-    return this.af.auth.logout();
-  }
+  	logoutUser(): firebase.Promise<any> {
+    	return this.af.auth.logout();
+  	}
 
-  signupUser(newEmail: string, newPassword: string): firebase.Promise<any> {
-    return this.af.auth.createUser({ 
-      email: newEmail, 
-      password: newPassword 
-    });
-  }
+  	signupUser(newEmail: string, newPassword: string): firebase.Promise<any> {
+    	return this.af.auth.createUser({ 
+      	email: newEmail, 
+      	password: newPassword 
+    	});
+  	}
 
 }
