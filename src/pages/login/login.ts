@@ -2,7 +2,7 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { AlertController, LoadingController, NavController } from 'ionic-angular';
 import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
-
+//import * as Firebase from 'firebase';
 /* Page Imports */
 //import { SignInPage } from './signin';
 
@@ -19,7 +19,7 @@ import { TabsPage } from '../tabs/tabs';
 })
 
 /* Exportable class */
-export class LoginPage implements OnInit{
+export class LoginPage implements OnInit {
 	//user = {"email":"","password":""};
 	root:any;
 	constructor(
@@ -61,11 +61,11 @@ export class LoginPage implements OnInit{
  	onClick(e):void{
  		console.log('Button clicked');
  		let self = this;
- 		let email:string = this.root.querySelector('#email').value;
- 		let password:string = this.root.querySelector('#password').value;
- 		this.af.auth.login({
- 			email: email,
- 			password: password
+ 		var email:string = self.root.querySelector('#email');
+ 		var password:string = self.root.querySelector('#password');
+ 		self.af.auth.login({
+ 			email: 'esteban.ramos.f@gmail.com',
+ 			password: 'estebanasd'
  		},{
  			provider: AuthProviders.Password,
  			method: AuthMethods.Password, 			
@@ -189,9 +189,14 @@ export class LoginPage implements OnInit{
  		});
  	}
 
+ 	onResetPassword(e):void{
+
+ 	}
+
 	/* Method to login with tap method */
- 	login():void{
- 		console.log('Trying login with tap method')
+ 	login(e):void{
+ 		console.log('Trying login with tap method');
+ 		this.onClick(e);
  	}
 
  	/* Method to login with twitter on tap method */

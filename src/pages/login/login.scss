@@ -1,7 +1,7 @@
 page-login{
 	background: white;
 }
-h1{
+h1, h2{
 	text-align: center;
 }
 img{
@@ -11,4 +11,21 @@ img{
 }
 .button{
 	/*margin:14%;*/
+}
+
+#loginTwitter {
+	background: #83B0FF;
+	color: #FFFFFF;
+}
+	#loginFacebook {
+		background: #1464DB;
+		color: #FFFFFF;
+	}
+#loginGooglePlus {
+	background: #F53535;
+	color: #FFFFFF;
+}
+#loginGithub {
+	background:	#000000;
+	color: #FFFFFF;
 }
