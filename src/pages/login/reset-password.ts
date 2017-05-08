@@ -7,7 +7,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { AuthData } from '../../providers/auth-data';
 
 /* Page Imports */
-import { LoginPage } from '../login/login';
+//import { LoginPage } from './login';
 
 /* Validator Imports */
 import { EmailValidator } from '../../validators/email';

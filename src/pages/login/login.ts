@@ -104,7 +104,8 @@ export class LoginPage implements OnInit {
 	}
 
 	goToResetPassword(){
-	    this.navCtrl.push(ResetPasswordPage);
+		console.log('Reset password ctm');
+	   this.navCtrl.push(ResetPasswordPage);
 	}
 
 	createAccount(){

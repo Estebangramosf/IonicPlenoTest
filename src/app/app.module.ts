@@ -16,6 +16,9 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
+import { ResetPasswordPage } from '../pages/login/reset-password';
+import { SignupPage } from '../pages/login/signup';
+
 
 /* Provider Imports */
 import { AuthData } from '../providers/auth-data';
@@ -43,7 +46,9 @@ var links = [
 		ContactPage,
 		HomePage,
 		TabsPage,
-		LoginPage
+		LoginPage,
+		ResetPasswordPage,
+		SignupPage
 	],
   	imports: [
 		BrowserModule,
@@ -57,7 +62,9 @@ var links = [
 		ContactPage,
 		HomePage,
 		TabsPage,
-		LoginPage
+		LoginPage,
+		ResetPasswordPage,
+		SignupPage
   	],
   	providers: [
 		StatusBar,
