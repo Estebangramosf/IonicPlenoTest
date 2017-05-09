@@ -39,14 +39,6 @@ export class LoginPage implements OnInit {
  		// Initialize var for get elements with selector queries
  		this.element.nativeElement;
 
-		// Validate with observable method if not exist active to dispose tabs pages
-		af.auth.subscribe( user => {
-			if (!user) {
-				console.log('NO hay sesion iniciada');
-				this.navCtrl.pop(TabsPage);		
-			}
-		});    		
-
  		// Initialize validator for form builder to specificate required fields and required format
 		this.loginForm = formBuilder.group({
 		   email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
@@ -65,6 +57,7 @@ export class LoginPage implements OnInit {
  		console.log('Arrancó el init de AngularJs');
  		// Initialize object to get elements from html with native js functions/methods
  		this.root = this.element.nativeElement;
+ 		
  		/*
  		var loginButton = this.root.querySelector('#loginButton');
  		var loginTwitter = this.root.querySelector('#loginTwitter');
@@ -89,8 +82,6 @@ export class LoginPage implements OnInit {
 			this.authData.loginUser(this.loginForm.value.email, this.loginForm.value.password)
 			.then( authData => {
 				// If authentification is correct, get response in authData and set rootPage how HomePage
-				//this.navCtrl.setRoot(TabsPage);
-				//this.navCtrl.setRoot(LoginPage);
 				this.navCtrl.push(TabsPage);
 			}, error => {
 				// Case that some data was incorrect, show message with error to users in screen

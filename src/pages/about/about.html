@@ -1,11 +1,60 @@
+<!-- View header -->
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      About
-    </ion-title>
-  </ion-navbar>
+	<!-- navbar -->
+	<ion-navbar>
+		<!-- title -->
+		<ion-title>About</ion-title>
+	</ion-navbar>
 </ion-header>
 
+<!-- View content -->
 <ion-content padding>
+	<!-- Iterate card -->
+	<ion-card>
+		<!-- Card avatar item -->
+	  	<ion-item>
+			<!-- Avatar img -->
+	    	<ion-avatar item-left>
+	      	<img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAp8AAAAJGQ3NTAzYzg4LTFlZGQtNGY0Ny05OTA4LWQyODE3ZjUzMGQxMA.jpg">
+	    	</ion-avatar>
+	    	<!-- Avatar info -->
+	    	<h2>Esteban Ramos</h2>
+	    	<p>May 9, 2017</p>
+	  	</ion-item>
+		
+		<!-- Card img -->
+	  	<img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAp8AAAAJGQ3NTAzYzg4LTFlZGQtNGY0Ny05OTA4LWQyODE3ZjUzMGQxMA.jpg">
+		
+		<!-- Card content -->
+	  	<ion-card-content>
+	    	<p>
+	    		Wait a minute. Wait a minute, This is only a template. Uhhh... I want to develop amazing apps.
+	    	</p>
+	  	</ion-card-content>
 
+		<!-- Card interactions detail container row -->
+	  	<ion-row>
+	  		<!-- Likes col -->
+	    	<ion-col>
+	      	<button ion-button icon-left clear small>
+	        		<ion-icon name="thumbs-up"></ion-icon>	
+	        		<div>12 Likes</div>
+	      	</button>
+	    	</ion-col>
+	    	<!-- Comments col -->
+	    	<ion-col>
+	      	<button ion-button icon-left clear small>
+	        		<ion-icon name="text"></ion-icon>
+	        		<div>4 Comments</div>
+      		</button>
+	    	</ion-col>
+	    	<!-- Time ago col -->
+	    	<ion-col center text-center>
+	      	<ion-note>
+	        		1h ago
+	      	</ion-note>
+	    	</ion-col>
+	  	</ion-row>
+
+	</ion-card>
 </ion-content>
