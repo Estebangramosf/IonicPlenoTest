@@ -19,24 +19,21 @@ import { LoginPage } from '../pages/login/login';
 import { ResetPasswordPage } from '../pages/login/reset-password';
 import { SignupPage } from '../pages/login/signup';
 
-
 /* Provider Imports */
 import { AuthData } from '../providers/auth-data';
 
 /* Config Imports */
+// Making exportable constants to reuse configs
 import { FIREBASE_CONFIG } from '../configs/firebase.config.ts';
+import { FIREBASE_AUTH_CONFIG } from '../configs/firebase-auth.config.ts';
 
-const myFirebaseAuthConfig = {
-	provider: AuthProviders.Password,
-	method: AuthMethods.Password
-}
-
+/* Array of components */
+//Making array with components to add in IonicModule
 var links = [
 	{ component: LoginPage, name:'Login', segment:'login' },
 	{ component: TabsPage, name:'Tabs', segment:'tabs' },
 	//{ component: ShowNotificationPage, name:'notification', segment:'notification/:id' },
 ];
-
 
 /* Angular mode to include all dependencies and components to use in the app */
 @NgModule({
@@ -50,11 +47,11 @@ var links = [
 		ResetPasswordPage,
 		SignupPage
 	],
-  	imports: [
+	imports: [
 		BrowserModule,
 		IonicModule.forRoot(MyApp, links),
-		AngularFireModule.initializeApp(FIREBASE_CONFIG, myFirebaseAuthConfig)
-  	],
+		AngularFireModule.initializeApp(FIREBASE_CONFIG, FIREBASE_AUTH_CONFIG)
+	],
 	bootstrap: [IonicApp],
 	entryComponents: [
 		MyApp,
@@ -65,12 +62,12 @@ var links = [
 		LoginPage,
 		ResetPasswordPage,
 		SignupPage
-  	],
-  	providers: [
+	],
+	providers: [
 		StatusBar,
 		Splashscreen,
 		{provide: ErrorHandler, useClass: IonicErrorHandler},
 		AuthData
-  	]
+	]
 })
 export class AppModule {}

@@ -4,9 +4,7 @@ import { NavController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 
 /* Service Imports */
-import { AuthData } from '../../services/auth-data';
-import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
-import firebase from 'firebase';
+import { AuthData } from '../../providers/auth-data';
 
 /* Component declaration */
 @Component({
@@ -17,12 +15,10 @@ import firebase from 'firebase';
 /* Exportable class */
 export class HomePage {
 
-	constructor(
-		public		navCtrl		: 	NavController,
-	 	public		af				:	AngularFire, 			
-	) {
+	constructor ( public navCtrl: NavController, public authData: AuthData ) {
 		window.localStorage.removeItem('user');
 		/* Validations that catch the non logged user */
+		//Second validation if user not logged in and redirect to login
 		if (!this.isAlreadyLoggedIn) {
 			console.log('Not login yet, reddirecting to login page...');
 			this.navCtrl.push(LoginPage);
@@ -35,10 +31,11 @@ export class HomePage {
 		return user !== null && user !== undefined;
 	}
 
-  	logoutUser(): firebase.Promise<any> {
-  		console.log(this.af.auth);
-  		this.af.auth.logout();
-    	return this.navCtrl.push(LoginPage);
+	/* Method called equals that service AuthData but here uses object method to close user 
+	session and redirect to login page */
+  	logoutUser():void {
+  		console.log(this.authData);
+  		this.authData.logoutUser();
+    	this.navCtrl.push(LoginPage);
   	}
-
 }

@@ -13,7 +13,6 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 
-
 /* Component declaration */
 @Component({
 	templateUrl: 'app.html'
@@ -24,19 +23,16 @@ export class MyApp {
 	//rootPage:any = TabsPage;
 	rootPage:any = LoginPage;
 
-	constructor(
-		platform: Platform, 
-		statusBar: StatusBar, 
-		splashScreen: Splashscreen,
-		public af:AngularFire
-	) {
-		
-		/* Validate that user was logged in and redirecto to home, else redirect to login view */
+	constructor ( platform: Platform, statusBar: StatusBar, splashScreen: Splashscreen, public af: AngularFire ) {		
+		// Validate that user was logged in and redirecto to home, else redirect to login view
+		// Make const authObserver and validate if exists active user sesion to change the rootPage
 		const authObserver = af.auth.subscribe( user => {
 			if (user) {
+				// If user sesion is active or exist something, rootPage was HomePage
 				this.rootPage = HomePage;
 				authObserver.unsubscribe();
 			} else {
+				// Else the rootPage was LoginPage to the user can be start new sesion, register or request new password
 				this.rootPage = LoginPage;
 				authObserver.unsubscribe();
 			}

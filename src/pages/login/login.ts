@@ -4,6 +4,7 @@ import { AlertController, LoadingController, NavController } from 'ionic-angular
 import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 import { FormBuilder, Validators } from '@angular/forms';
 //import * as Firebase from 'firebase';
+
 /* Page Imports */
 //import { SignInPage } from './signin';
 import { HomePage } from '../home/home';
@@ -26,30 +27,23 @@ import { EmailValidator } from '../../validators/email';
 	templateUrl: 'login.html',
 })
 
-/* Exportable class */
+/* Exportable class/component */
 export class LoginPage implements OnInit {
-	//user = {"email":"","password":""};
 	root:any;
 	loginForm: any;
 	loading: any;
-	constructor(
-		private 		alertCtrl	: 	AlertController,
-		public		navCtrl		: 	NavController,
-		public	 	authData		: 	AuthData,
-		public 		formBuilder	: 	FormBuilder,
-	 	public	  	loadingCtrl	: 	LoadingController,
-	 	public 		element 		: 	ElementRef,
-	 	public		af				:	AngularFire, 	
-	 	//private 	userService: UserService, 
+	constructor ( private alertCtrl:	AlertController, public navCtrl: NavController, public authData: AuthData,
+		public formBuilder: FormBuilder, public loadingCtrl: LoadingController, public element: ElementRef, 
+		public af: AngularFire//,private 	userService: UserService, 
  	){ 		
- 		/* Initialize var for get elements with selector queries */
+ 		// Initialize var for get elements with selector queries
  		this.element.nativeElement;
 
+ 		// Initialize validator for form builder to specificate required fields and required format
 		this.loginForm = formBuilder.group({
 		   email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
 		   password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
 		});
-
 
  		/*
 		DBService.openDatabase();
@@ -60,7 +54,8 @@ export class LoginPage implements OnInit {
 
  	/* On angular init do: */
  	ngOnInit(){
- 		console.log('Arrancó el init');
+ 		console.log('Arrancó el init de AngularJs');
+ 		// Initialize object to get elements from html with native js functions/methods
  		this.root = this.element.nativeElement;
  		/*
  		var loginButton = this.root.querySelector('#loginButton');
@@ -76,13 +71,17 @@ export class LoginPage implements OnInit {
  		*/
  	}
 
+ 	// Function loginUser with email/user and password
 	loginUser(){
+		// Validate with angular function if the login form is valid, if not, show message by console to debug
 		if (!this.loginForm.valid){
 			console.log(this.loginForm.value);
 		} else {
-			this.authData.loginUser(this.loginForm.value.email, 
-			this.loginForm.value.password).then( authData => {
-				this.navCtrl.setRoot(HomePage);
+			// Else, the format and required fields was ok, so instance login function in authData function with email and pw
+			this.authData.loginUser(this.loginForm.value.email, this.loginForm.value.password)
+			.then( authData => {
+				//If authentification is correct, get response in authData and set rootPage how HomePage
+				this.navCtrl.setRoot(TabsPage);
 			}, error => {
 				this.loading.dismiss().then( () => {
 					let alert = this.alertCtrl.create({
@@ -104,7 +103,7 @@ export class LoginPage implements OnInit {
 	}
 
 	goToResetPassword(){
-		console.log('Reset password ctm');
+		console.log('Reset password');
 	   this.navCtrl.push(ResetPasswordPage);
 	}
 
@@ -121,7 +120,7 @@ export class LoginPage implements OnInit {
  		var password:string = self.root.querySelector('#password');
  		self.af.auth.login({
  			email: 'esteban.ramos.f@gmail.com',
- 			password: 'estebanasd'
+ 			password: 'test1234'
  		},{
  			provider: AuthProviders.Password,
  			method: AuthMethods.Password, 			

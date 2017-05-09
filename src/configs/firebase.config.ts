@@ -1,3 +1,4 @@
+/* Exportable Constant */
 export const FIREBASE_CONFIG = {
 	apiKey: "AIzaSyDtdUUV7cu0Yr_pT8L1IHsJITW1Q_q8Lc8",
 	authDomain: "ionicplenotest.firebaseapp.com",
