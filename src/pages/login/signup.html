@@ -1,37 +1,65 @@
+<!-- View header -->
 <ion-header>
-  <ion-navbar color="primary">
-    <ion-title>
-      Create an Account
-    </ion-title>
-  </ion-navbar>
+	<!-- navbar -->
+	<ion-navbar color="primary">
+		<!-- title -->
+		<ion-title>Create an Account</ion-title>
+	</ion-navbar>
 </ion-header>
 
-
+<!-- View content -->
 <ion-content padding>
-  <form [formGroup]="signupForm" (submit)="signupUser()" novalidate>
+	<!-- Signup form, on submit, execute submit function signupUser() -->
+	<form [formGroup]="signupForm" (submit)="signupUser()" novalidate>
 
-    <ion-item>
-      <ion-label stacked>Email</ion-label>
-      <ion-input formControlName="email" type="email" placeholder="Your email address"
-        [class.invalid]="!signupForm.controls.email.valid && signupForm.controls.email.dirty"></ion-input>
-    </ion-item>
-    <ion-item class="error-message" *ngIf="!signupForm.controls.email.valid  && signupForm.controls.email.dirty">
-      <p>Please enter a valid email.</p>
-    </ion-item>
+		<!-- Item for email, label and input -->
+		<ion-item>
+			<!-- Login label email -->
+			<ion-label stacked>Email</ion-label>
 
-    <ion-item>
-      <ion-label stacked>Password</ion-label>
-      <ion-input formControlName="password" type="password"  placeholder="Your password"
-        [class.invalid]="!signupForm.controls.password.valid && signupForm.controls.password.dirty"></ion-input>
-    </ion-item>
-    <ion-item class="error-message" *ngIf="!signupForm.controls.password.valid  && signupForm.controls.password.dirty">
-      <p>Your password needs more than 6 characters.</p>
-    </ion-item>
+			<!-- Email input with angular validation -->
+			<ion-input 
+				formControlName="email" 
+				type="email" 
+				placeholder="Your email address"
+				[class.invalid]="!signupForm.controls.email.valid && signupForm.controls.email.dirty">
+			</ion-input>
+		</ion-item>
 
-    <button ion-button block type="submit">
-      Create an Account
-    </button>
+		<!-- Message for email validation format  -->
+		<ion-item 
+			class="error-message" 
+			*ngIf="!signupForm.controls.email.valid  && signupForm.controls.email.dirty">
+			<!-- if email control not is valid and dirty with other elements, show this message -->
+			<p>Please enter a valid email.</p>
+		</ion-item>
 
-  </form>
+		<!-- Item for password , label and input -->
+		<ion-item>
+			<!-- Login label password -->
+			<ion-label stacked>Password</ion-label>
 
+			<!-- Password input with angular validation -->
+			<ion-input 
+				formControlName="password" 
+				type="password" 
+				placeholder="Your password"
+				[class.invalid]="!signupForm.controls.password.valid && signupForm.controls.password.dirty">
+			</ion-input>
+		</ion-item>
+
+		<!-- Message for password validation format -->
+		<ion-item 
+			class="error-message" 
+			*ngIf="!signupForm.controls.password.valid  && signupForm.controls.password.dirty">
+			<!-- if password control not is valid and dirty with other elements, show this message -->
+			<p>Your password needs more than 6 characters.</p>
+		</ion-item>
+
+		<!-- Button to submit form and log in -->
+		<button ion-button block type="submit">
+			Create an Account
+		</button>
+
+	</form>
 </ion-content>

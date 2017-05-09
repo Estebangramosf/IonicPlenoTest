@@ -8,7 +8,7 @@
 </ion-header>
 
 <!-- View content -->
-<ion-content padding>
+<ion-content padding hide-tabs>
 
 	<!-- Login image, company representative -->
 	<img src="https://www.pleno.digital/assets/img/portal/logo_pleno_top.png" />
@@ -19,6 +19,11 @@
 						LOGIN WITH SOCIAL BUTTONS FIREBASE
 		##########################################################
 	-->
+		
+	<!-- 
+		This functions are using tap method provides for angular, with the id of element also can get value
+		with selectors by lib provides by ionin and angular, in this case are using tap for ease
+	-->
 
 	<!-- Twitter login button -->
 	<button ion-button block id="loginTwitter" ion-text color="twitter" (tap)="loginWithTwitter($event)">
@@ -28,18 +33,17 @@
 	<!-- Facebook login button -->
 	<button ion-button block id="loginFacebook" ion-text color="facebook" (tap)="loginWithFacebook($event)">
 		<ion-icon name="logo-facebook"></ion-icon>&nbsp;Login with Facebook
-	</button>			
+	</button>
 
 	<!-- Google Plus login button -->
 	<button ion-button block id="loginGooglePlus" ion-text color="google" (tap)="loginWithGooglePlus($event)">
 		<ion-icon name="logo-google"></ion-icon>&nbsp;Login with G+
-	</button>					
+	</button>
 
 	<!-- Github login button -->
 	<button ion-button block id="loginGithub" ion-text color="github" (tap)="loginWithGithub($event)">
 		<ion-icon name="logo-github"></ion-icon>&nbsp;Login with Github
-	</button>		
-
+	</button>
 
 	<!-- 
 		##########################################################
@@ -52,50 +56,65 @@
 	<!-- Login form -->
 	<form id="login-form" [formGroup]="loginForm" (submit)="loginUser()" novalidate>
 
+		<!-- Item for email , label and input -->
 		<ion-item>
+			<!-- Login label email -->
 			<ion-label stacked>Email</ion-label>
+
+			<!-- Email input with angular validation -->
 			<ion-input #email 
 				formControlName="email" 
 				type="email" 
 				(change)="elementChanged(email)"
-					placeholder="Your email address"
-					[class.invalid]="!loginForm.controls.email.valid && loginForm.controls.email.dirty">		
+				placeholder="Your email address"
+				[class.invalid]="!loginForm.controls.email.valid && loginForm.controls.email.dirty">
 			</ion-input>
 		</ion-item>
 
+		<!-- Message for email validation format  -->
 		<ion-item 
 			class="error-message" 
-		*ngIf="!loginForm.controls.email.valid  && loginForm.controls.email.dirty">
+			*ngIf="!loginForm.controls.email.valid  && loginForm.controls.email.dirty">
+			<!-- if email control not is valid and dirty with other elements, show this message -->
 			<p>Please enter a valid email.</p>
 		</ion-item>
 
+		<!-- Item for password , label and input -->
 		<ion-item>
+			<!-- Login label password -->
 			<ion-label stacked>Password</ion-label>
+
+			<!-- Password input with angular validation -->
 			<ion-input #password 
 				formControlName="password" 
 				type="password"
-					(change)="elementChanged(password)"
-					placeholder="Your password"
-					[class.invalid]="!loginForm.controls.password.valid && loginForm.controls.password.dirty">        			
+				(change)="elementChanged(password)"
+				placeholder="Your password"
+				[class.invalid]="!loginForm.controls.password.valid && loginForm.controls.password.dirty">
 			</ion-input>
 		</ion-item>
-
+	
+		<!-- Message for password validation format -->
 		<ion-item 
 			class="error-message" 
-			*ngIf="!loginForm.controls.password.valid  && loginForm.controls.password.dirty">
+			*ngIf="!loginForm.controls.password.valid && loginForm.controls.password.dirty"> 
+			<!-- if password control not is valid and dirty with other elements, show this message -->
 			<p>Your password needs more than 6 characters.</p>
 		</ion-item>
 
+		<!-- Button to submit form and log in -->
 		<button ion-button block type="submit">
-		Login
+			Login
 		</button>
 
 	</form>
 
+	<!-- Button to show view to reset password -->
 	<button ion-button block clear (click)="goToResetPassword()">
 		I forgot my password 🙁
 	</button>
 
+	<!-- Button to show view to create new account -->
 	<button ion-button block clear (click)="createAccount()">
 		Create a new account
 	</button>

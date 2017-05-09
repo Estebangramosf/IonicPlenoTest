@@ -39,6 +39,14 @@ export class LoginPage implements OnInit {
  		// Initialize var for get elements with selector queries
  		this.element.nativeElement;
 
+		// Validate with observable method if not exist active to dispose tabs pages
+		af.auth.subscribe( user => {
+			if (!user) {
+				console.log('NO hay sesion iniciada');
+				this.navCtrl.pop(TabsPage);		
+			}
+		});    		
+
  		// Initialize validator for form builder to specificate required fields and required format
 		this.loginForm = formBuilder.group({
 		   email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
@@ -80,9 +88,12 @@ export class LoginPage implements OnInit {
 			// Else, the format and required fields was ok, so instance login function in authData function with email and pw
 			this.authData.loginUser(this.loginForm.value.email, this.loginForm.value.password)
 			.then( authData => {
-				//If authentification is correct, get response in authData and set rootPage how HomePage
-				this.navCtrl.setRoot(TabsPage);
+				// If authentification is correct, get response in authData and set rootPage how HomePage
+				//this.navCtrl.setRoot(TabsPage);
+				//this.navCtrl.setRoot(LoginPage);
+				this.navCtrl.push(TabsPage);
 			}, error => {
+				// Case that some data was incorrect, show message with error to users in screen
 				this.loading.dismiss().then( () => {
 					let alert = this.alertCtrl.create({
 						message: error.message,
@@ -94,7 +105,7 @@ export class LoginPage implements OnInit {
 					alert.present();
 				});
 			});
-
+			// Shows loading icon and when dismiss page, this was disposed
 			this.loading = this.loadingCtrl.create({
 				dismissOnPageChange: true,
 			});
@@ -102,17 +113,24 @@ export class LoginPage implements OnInit {
 		}
 	}
 
+	// Funciont that show view to reset password
 	goToResetPassword(){
 		console.log('Reset password');
+		this.navCtrl.pop();
 	   this.navCtrl.push(ResetPasswordPage);
 	}
 
+	// Function that show view to create new account
 	createAccount(){
-	    this.navCtrl.push(SignupPage);
+		this.navCtrl.pop();
+	   this.navCtrl.push(SignupPage);
 	}
 
 
  	/* Method to login with event listener from button id */
+ 	// This is another method to login using native elements, how for example :
+ 	// Javascript functions to get elements by id, or selectors.
+ 	//Now this function is deprecated, because was replaced by the first function
  	onClick(e):void{
  		console.log('Button clicked');
  		let self = this;
@@ -138,6 +156,12 @@ export class LoginPage implements OnInit {
  		});
  	}
 
+ 	/*
+ 		##########################################################
+				FUNCTIONS WITH EVENT LISTENER AND SELECTORS
+ 		##########################################################		
+ 	*/
+
  	/* Method to login with twitter on event listener from button id */
  	onTwitterLogin(e):void{
  		console.log('Logging in with Twitter');
@@ -154,6 +178,7 @@ export class LoginPage implements OnInit {
  			window.localStorage.setItem('user',JSON.stringify(user));
  			//self.navCtrl.pop();
  			self.navCtrl.push(TabsPage);
+ 			//self.navCtrl.setRoot(TabsPage);
  		}).catch((error)=>{
  			//console.log(error);
  			if (error !== null || error !== undefined) { //Quiere decir que ya está registrado con otra cuenta
@@ -244,9 +269,15 @@ export class LoginPage implements OnInit {
  		});
  	}
 
- 	onResetPassword(e):void{
 
- 	}
+ 	/*
+ 		##########################################################
+						FUNCTIONS WITH ANGULAR TAP METHODS
+ 		##########################################################		
+ 	*/
+
+ 	// This functions also call functions with selector, because was be created first and the next methods is 
+ 	// Only to create another alternatives.
 
 	/* Method to login with tap method */
  	login(e):void{
@@ -278,8 +309,4 @@ export class LoginPage implements OnInit {
  		this.onGithubLogin(e);
  	} 	 	
 
- 	/* Method to sign in on application */
-	signIn():void{
-		console.log('Trying sign with tap method')
-	}
 }

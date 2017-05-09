@@ -2,6 +2,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
+import { TabsPage } from '../tabs/tabs';
 
 /* Service Imports */
 import { AuthData } from '../../providers/auth-data';
@@ -35,7 +36,11 @@ export class HomePage {
 	session and redirect to login page */
   	logoutUser():void {
   		console.log(this.authData);
-  		this.authData.logoutUser();
-    	this.navCtrl.push(LoginPage);
+  		//this.navCtrl.setRoot(LoginPage);
+  		//this.navCtrl.pop(TabsPage);
+  		this.authData.logoutUser();  		
+  		this.navCtrl.setRoot(LoginPage);
+  		//this.navCtrl.pop();
+  		this.navCtrl.popToRoot();  		
   	}
 }

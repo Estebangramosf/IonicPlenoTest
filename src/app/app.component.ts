@@ -29,7 +29,7 @@ export class MyApp {
 		const authObserver = af.auth.subscribe( user => {
 			if (user) {
 				// If user sesion is active or exist something, rootPage was HomePage
-				this.rootPage = HomePage;
+				this.rootPage = LoginPage;
 				authObserver.unsubscribe();
 			} else {
 				// Else the rootPage was LoginPage to the user can be start new sesion, register or request new password
