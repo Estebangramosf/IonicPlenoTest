@@ -1,6 +1,6 @@
 {
   "name": "IonicPlenoTest",
-  "app_id": "",
+  "integrations": {},
   "v2": true,
   "typescript": true
 }
